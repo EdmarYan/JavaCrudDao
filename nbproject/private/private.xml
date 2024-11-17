@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group name="udf">
+            <file>file:/C:/Users/edmar/OneDrive/Documentos/NetBeansProjects/LGPDII_A3/src/controller/TarefaController.java</file>
+            <file>file:/C:/Users/edmar/OneDrive/Documentos/NetBeansProjects/LGPDII_A3/src/main/MainTeste.java</file>
+            <file>file:/C:/Users/edmar/OneDrive/Documentos/NetBeansProjects/LGPDII_A3/src/util/ConnectionFactory.java</file>
+            <file>file:/C:/Users/edmar/OneDrive/Documentos/NetBeansProjects/LGPDII_A3/src/controller/UsuarioController.java</file>
+            <file>file:/C:/Users/edmar/OneDrive/Documentos/NetBeansProjects/LGPDII_A3/src/dao/UsuarioDAO.java</file>
+            <file>file:/C:/Users/edmar/OneDrive/Documentos/NetBeansProjects/LGPDII_A3/src/dao/TarefaDAO.java</file>
+            <file>file:/C:/Users/edmar/OneDrive/Documentos/NetBeansProjects/LGPDII_A3/src/controller/CategoriaController.java</file>
+            <file>file:/C:/Users/edmar/OneDrive/Documentos/NetBeansProjects/LGPDII_A3/src/model/Usuario.java</file>
+            <file>file:/C:/Users/edmar/OneDrive/Documentos/NetBeansProjects/LGPDII_A3/src/model/Tarefa.java</file>
+            <file>file:/C:/Users/edmar/OneDrive/Documentos/NetBeansProjects/LGPDII_A3/src/dao/CategoriaDAO.java</file>
+            <file>file:/C:/Users/edmar/OneDrive/Documentos/NetBeansProjects/LGPDII_A3/src/model/Categoria.java</file>
+        </group>
+    </open-files>
+</project-private>
