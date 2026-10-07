@@ -1,35 +1,54 @@
-# Java CRUD DAO - Todo List
+# Java CRUD DAO - Gerenciador de Tarefas
 
-Fala pessoal, beleza? Meu nome é **Edmar Yan Faria de Melo** e esse é um projetinho que eu desenvolvi na época em que eu estudava na **ETB**. 
+Este repositório contém um sistema de gerenciamento de tarefas (Todo List) desenvolvido em **Java**. Foi criado originalmente como um projeto acadêmico durante meus estudos na **ETB** (Escola Técnica de Brasília), com o objetivo de consolidar fundamentos de Programação Orientada a Objetos e acesso a banco de dados.
 
-A ideia aqui foi construir um sistema de gerenciamento de tarefas (Todo List) em Java puro, colocando em prática conceitos como padrão **DAO** (Data Access Object), **MVC** e manipulação de banco de dados via **JDBC**. Ele tem uma interface bem simples feita com `JOptionPane` (aquelas caixinhas de diálogo do Java Swing).
+O foco do projeto é demonstrar a aplicação de padrões de arquitetura como **MVC** (Model-View-Controller) e **DAO** (Data Access Object), além da manipulação direta de um banco de dados relacional (MySQL) através de conexão **JDBC**.
 
-## O que o sistema faz?
-Ele é um CRUD completo para gerenciar três coisas:
-- **Usuários:** Criar conta, editar, listar e deletar.
-- **Categorias:** Pra organizar as tarefas.
-- **Tarefas:** A parte principal. Dá pra cadastrar, mudar o status (pendente, concluído, etc), filtrar e gerar um relatório.
+## 📌 Funcionalidades
 
-A estrutura do código tá dividida bonitinha em pacotes (`model`, `dao`, `controller`), então tá bem fácil de entender como as coisas se conectam. Além disso, as consultas no banco tão protegidas contra SQL Injection e usando `try-with-resources` pra não dar ruim com conexão aberta travando o banco.
+O sistema possui uma interface gráfica baseada em `JOptionPane` e provê operações completas de CRUD (Criar, Ler, Atualizar, Deletar) para três entidades principais:
+- **Usuários:** Cadastro, listagem, atualização e remoção.
+- **Categorias:** Estruturação para agrupamento de tarefas.
+- **Tarefas:** Criação, modificação de status, filtros operacionais e exibição de relatórios.
 
-## Como rodar no seu PC?
+## 🛠️ Tecnologias e Padrões
 
-Você vai precisar rodar o banco de dados (MySQL) e depois compilar a aplicação no seu NetBeans, Eclipse ou IntelliJ. O ponto de entrada da aplicação é o arquivo `src/main/MainTeste.java`.
+- **Linguagem:** Java
+- **Interface:** Java Swing (`JOptionPane`)
+- **Padrões de Projeto:** MVC, DAO
+- **Banco de Dados:** MySQL
+- **Boas Práticas Implementadas:** 
+  - Proteção contra vulnerabilidades de *SQL Injection* utilizando `PreparedStatement`.
+  - Prevenção contra *Memory Leaks* no banco de dados, fazendo o uso rigoroso de blocos `try-with-resources` para fechamento e devolução automática de conexões.
+
+## 🗂️ Arquitetura do Projeto
+
+A organização interna segue as camadas do padrão de projeto:
+
+- `src/model/`: Classes puras que representam as entidades de negócio (Usuário, Categoria, Tarefa).
+- `src/dao/`: Camada de persistência que gerencia as operações (queries SQL) para o banco.
+- `src/controller/`: Orquestra as interações entre as chamadas visuais e a camada de acesso a dados.
+- `src/main/`: Contém a classe principal (`MainTeste.java`) com o *loop* de execução do sistema.
+- `src/util/`: Componentes utilitários, como a classe `ConnectionFactory` responsável por lidar com o JDBC.
+
+## 🚀 Como Executar
+
+A aplicação requer um ambiente Java local e uma instância ativa do banco de dados MySQL na porta `3306`. A inicialização do código deve ser feita compilando e executando a classe `src/main/MainTeste.java` em sua IDE de preferência (como NetBeans, IntelliJ ou Eclipse).
+
+Abaixo estão as instruções de como provisionar o banco de dados.
 
 ### Subindo o Banco de Dados (Opção 1: Docker 🐳)
-Para facilitar a vida e não precisar instalar nada pesado, eu adicionei um arquivo Docker. Se você tiver o Docker instalado, basta abrir o terminal na pasta do projeto e rodar:
+
+O projeto inclui uma configuração de contêinerização para o MySQL, permitindo levantar o banco e criar as tabelas automaticamente de forma transparente. Tendo o Docker instalado, abra o terminal na raiz do projeto e execute:
 
 ```bash
 docker compose up -d
 ```
+A partir deste momento, o banco já estará pronto para receber as conexões do Java.
 
-Só isso! O Docker vai baixar o MySQL, subir na porta 3306 e já vai criar o banco `todo_list` e todas as tabelas usando o script que deixei na pasta `bancoDeDados`. Depois disso é só rodar o projeto Java.
+### Subindo o Banco de Dados (Opção 2: XAMPP / Local)
 
-### Subindo o Banco de Dados (Opção 2: XAMPP)
-Se você não usa Docker e prefere o XAMPP da velha guarda:
-1. Liga o Apache e o MySQL no XAMPP.
-2. Abre o phpMyAdmin (ou DBeaver).
-3. Roda o script que tá no arquivo `bancoDeDados/todolist.sql`. Ele já vai criar o banco e as tabelas pra você.
-
-## Considerações
-Esse foi um projeto acadêmico de estudos, mas serve muito bem como base pra quem tá aprendendo Java e banco de dados. Fiquem à vontade pra clonar, brincar com o código ou mandar um pull request!
+Caso prefira gerenciar o banco manualmente sem o Docker:
+1. Inicie o serviço do MySQL localmente (através do painel do XAMPP, por exemplo).
+2. Abra seu cliente de banco de dados (phpMyAdmin, DBeaver, MySQL Workbench).
+3. Importe e execute as queries do arquivo de setup localizado em `bancoDeDados/todolist.sql`. Ele irá criar o *database* `todo_list` bem como todas as tabelas necessárias.
