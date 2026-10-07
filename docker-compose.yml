@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: todo_list_db
+    environment:
+      MYSQL_ROOT_PASSWORD: "" # Root sem senha (igual ao XAMPP local)
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: todo_list
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      # O script SQL vai rodar automaticamente quando o container subir pela primeira vez
+      - ./bancoDeDados/todolist.sql:/docker-entrypoint-initdb.d/todolist.sql
+    restart: unless-stopped
+
+volumes:
+  db_data:

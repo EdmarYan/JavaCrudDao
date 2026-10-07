@@ -1,68 +1,35 @@
-# Java CRUD DAO - Todo List ✅
+# Java CRUD DAO - Todo List
 
-Bem-vindo ao projeto **JavaCrudDao**! Este é um sistema de gerenciamento de tarefas (Todo List) desenvolvido em **Java** puro, aplicando conceitos fundamentais como Padrão **DAO** (Data Access Object), **MVC** (Model-View-Controller) e manipulação de banco de dados relacional via **JDBC**.
+Fala pessoal, beleza? Meu nome é **Edmar Yan Faria de Melo** e esse é um projetinho que eu desenvolvi na época em que eu estudava na **ETB**. 
 
-## 📌 Funcionalidades
+A ideia aqui foi construir um sistema de gerenciamento de tarefas (Todo List) em Java puro, colocando em prática conceitos como padrão **DAO** (Data Access Object), **MVC** e manipulação de banco de dados via **JDBC**. Ele tem uma interface bem simples feita com `JOptionPane` (aquelas caixinhas de diálogo do Java Swing).
 
-O sistema possui uma interface interativa baseada em `JOptionPane` e suporta operações completas de CRUD (Create, Read, Update, Delete) para 3 entidades principais:
+## O que o sistema faz?
+Ele é um CRUD completo para gerenciar três coisas:
+- **Usuários:** Criar conta, editar, listar e deletar.
+- **Categorias:** Pra organizar as tarefas.
+- **Tarefas:** A parte principal. Dá pra cadastrar, mudar o status (pendente, concluído, etc), filtrar e gerar um relatório.
 
-- 👤 **Usuários**: Cadastro, Listagem, Atualização e Exclusão.
-- 🏷️ **Categorias**: Gerenciamento de categorias para melhor organização.
-- 📋 **Tarefas**: 
-  - Gerenciamento completo de tarefas.
-  - Filtro por status (pendente, concluída, etc).
-  - Ordenação.
-  - Exibição de relatórios interativos.
+A estrutura do código tá dividida bonitinha em pacotes (`model`, `dao`, `controller`), então tá bem fácil de entender como as coisas se conectam. Além disso, as consultas no banco tão protegidas contra SQL Injection e usando `try-with-resources` pra não dar ruim com conexão aberta travando o banco.
 
-## 🛠️ Tecnologias Utilizadas
+## Como rodar no seu PC?
 
-- **Linguagem:** Java (JDK 8 ou superior)
-- **Design Patterns:** MVC (Model, View, Controller) e DAO (Data Access Object)
-- **Banco de Dados:** MySQL / MariaDB (integrado via XAMPP)
-- **Interface:** Java Swing (`JOptionPane`)
-- **IDE Padrão:** Apache NetBeans (mas pode ser rodado em IntelliJ ou Eclipse)
+Você vai precisar rodar o banco de dados (MySQL) e depois compilar a aplicação no seu NetBeans, Eclipse ou IntelliJ. O ponto de entrada da aplicação é o arquivo `src/main/MainTeste.java`.
 
-## 🗂️ Estrutura do Projeto
+### Subindo o Banco de Dados (Opção 1: Docker 🐳)
+Para facilitar a vida e não precisar instalar nada pesado, eu adicionei um arquivo Docker. Se você tiver o Docker instalado, basta abrir o terminal na pasta do projeto e rodar:
 
-A arquitetura do projeto foi dividida em pacotes para manter as responsabilidades separadas:
-
-```
-src/
- ├── controller/  # Controladores: Orquestram a interface visual com a lógica e persistência.
- ├── dao/         # Data Access Object: Classes que contêm as queries SQL (INSERT, SELECT, UPDATE, DELETE).
- ├── main/        # Classes de inicialização (MainTeste.java contém o loop do programa).
- ├── model/       # Entidades: Classes puras representando Usuário, Categoria e Tarefa.
- ├── util/        # Utilitários: Classe genérica (ConnectionFactory) para gerar as conexões com o MySQL.
+```bash
+docker compose up -d
 ```
 
----
+Só isso! O Docker vai baixar o MySQL, subir na porta 3306 e já vai criar o banco `todo_list` e todas as tabelas usando o script que deixei na pasta `bancoDeDados`. Depois disso é só rodar o projeto Java.
 
-## 🚀 Como Rodar o Projeto
+### Subindo o Banco de Dados (Opção 2: XAMPP)
+Se você não usa Docker e prefere o XAMPP da velha guarda:
+1. Liga o Apache e o MySQL no XAMPP.
+2. Abre o phpMyAdmin (ou DBeaver).
+3. Roda o script que tá no arquivo `bancoDeDados/todolist.sql`. Ele já vai criar o banco e as tabelas pra você.
 
-### Passo 1: Configurar o Banco de Dados
-
-1. Instale o [XAMPP](https://www.apachefriends.org/pt_br/index.html) e inicie os serviços do **Apache** e **MySQL**.
-2. Acesse o seu gerenciador de banco de dados (ex: `phpMyAdmin` em `http://localhost/phpmyadmin/` ou via DBeaver/MySQL Workbench).
-3. Importe o script SQL do banco de dados contido neste repositório em:
-   `bancoDeDados/todolist.sql`
-
-*(Isso criará o banco `todo_list` com as tabelas `Usuario`, `Categoria` e `Tarefa`).*
-
-### Passo 2: Executar a Aplicação
-- **Via NetBeans**: Abra o projeto, clique em "Clean and Build" e depois em "Run". A classe principal é a `src/main/MainTeste.java`.
-- **Via IDE (IntelliJ/Eclipse)**: Clone o projeto, configure o JDK e rode a classe `MainTeste`.
-- _Lembre-se de verificar se o conector do MySQL (MySQL JDBC Driver) está adicionado nas bibliotecas do projeto_.
-
-## 🧐 Auditoria e Boas Práticas (Pontos de Atenção)
-
-Durante uma rápida análise (auditoria técnica) deste código, os seguintes padrões positivos foram identificados:
-- **Gerenciamento de Conexão Seguro:** As classes do DAO utilizam a estrutura `try-with-resources`. Isso garante que conexões, Statements e ResultSets sejam fechados automaticamente, prevenindo vazamentos de memória (Memory Leaks).
-- **Injeção via Prepared Statements:** Todo acesso SQL é parametrizado (`?`), o que previne completamente vulnerabilidades contra *SQL Injection*.
-- **Estrutura MVC Bem Definida:** O código de view (as caixas de mensagem do JOptionPane) está nos controllers, isolando os Models e a Lógica de SQL.
-
-### Sugestões de Evolução Futura
-1. **Tratamento de Senhas:** Atualizar os métodos de persistência para criptografar senhas (usando Bcrypt) em vez de salvá-las em texto plano no banco de dados.
-2. **Separação View/Controller:** Caso a aplicação cresça, mover os blocos `JOptionPane` dos `Controllers` para classes puramente de `View`, deixando os `Controllers` sem dependência de biblioteca gráfica (`javax.swing`).
-
----
-Feito para fins educacionais e aprimoramento em boas práticas de programação Java Orientada a Objetos.
+## Considerações
+Esse foi um projeto acadêmico de estudos, mas serve muito bem como base pra quem tá aprendendo Java e banco de dados. Fiquem à vontade pra clonar, brincar com o código ou mandar um pull request!
